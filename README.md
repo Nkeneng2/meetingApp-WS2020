@@ -75,8 +75,14 @@ The goal of this software development project is to create an application that
 Automate, simplify and improve the scheduling, room and non-monetary bookings
 accelerate. This should be executable on Android and IOS system and will be supported by
 Flutter (frontend) and Back4App (backend) are being developed.
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
+
+
+
+
+
+
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 .
 
 ### Built With
