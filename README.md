@@ -101,7 +101,17 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+#### Configure the Flutter SDK
+
+1. Download the [.zip file of the Flutter SDK]([https://flutter.dev/docs/get-started/install/windows#get-the-flutter-sdk](https://flutter.dev/docs/get-started/install/windows#get-the-flutter-sdk)).
+2. Extract the .zip file in C disk. C:\flutter.
+3. Press Windows key and in the search bar type variable.
+4. Select Edit the system environment variables.
+5. Click on Environment Variables.
+6. In System variables select the Path variable and then click on Edit.
+7. Click on New and paste the path of bin folder of Flutter:
+    C:\flutter\bin
+8. Now click on Ok in the 3 windows to save changes.
 * npm
 ```sh
 npm install npm@latest -g
