@@ -103,7 +103,7 @@ To get a local copy up and running follow these simple example steps.
 
 #### Configure the Flutter SDK
 
-1. Download the [.zip file of the Flutter SDK]([https://flutter.dev/docs/get-started/install/windows#get-the-flutter-sdk](https://flutter.dev/docs/get-started/install/windows#get-the-flutter-sdk)).
+1. Download the ([.zip file of the Flutter SDK](https://flutter.dev/docs/get-started/install/windows#get-the-flutter-sdk)).
 2. Extract the .zip file in C disk. C:\flutter.
 3. Press Windows key and in the search bar type variable.
 4. Select Edit the system environment variables.
