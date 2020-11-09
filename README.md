@@ -188,7 +188,7 @@ The file browser will open.
 
 
 ### Installation
-
+<!---
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
 ```sh
@@ -202,7 +202,7 @@ npm install
 ```JS
 const API_KEY = 'ENTER YOUR API';
 ```
-
+--->
 
 
 <!-- USAGE EXAMPLES -->
