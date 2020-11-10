@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:team3/Common/upperTransition.dart';
 import 'package:team3/Login/view.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -13,25 +14,6 @@ class RegistrationPage extends StatefulWidget {
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
 }
-
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => LoginPage(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = Offset(0.0, 1.0);
-      var end = Offset.zero;
-      var curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
-
 
 class _RegistrationPageState extends State<RegistrationPage> {
 
@@ -226,7 +208,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             padding: const EdgeInsets.only(right: 10),
                             child: GestureDetector(
                               onTap: (){
-                                Navigator.of(context).push(_createRoute());
+                                Navigator.of(context).push(createRoute('login'));
                               },
                               child: Container(
                                 child: Text('Already have an anccount ? Sign Up',style: TextStyle(color: Colors.white,fontSize: 18),),
