@@ -32,7 +32,9 @@ class _LoginPageState extends State<LoginPage> {
   login() async {
     User formData = new User(userName: username, password: password);
     print(BaseUrl + 'login');
-    User user = await formData.login(BaseUrl + 'login', body: formData.toMap());
+    User user = await formData
+        .login(BaseUrl + 'login', body: formData.toMap())
+        .catchError(onError);
     if (user.email != null) {
       Navigator.push(
         context,
@@ -42,6 +44,10 @@ class _LoginPageState extends State<LoginPage> {
                 )),
       );
     }
+  }
+
+  onError(e) {
+    _handleLoginError();
   }
 
   @override
@@ -101,17 +107,6 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                        child: Text(
-                          'Username or password incorrect',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w200),
-                        )),
                     SizedBox(
                       height: 20,
                     ),
@@ -273,5 +268,32 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _handleLoginError() {
+    var scrollController = ScrollController();
+    var actionScrollController = ScrollController();
+    var dia = CupertinoAlertDialog(
+      title: Text("Oups"),
+      content: Text("Username / email  or password incorrect"),
+      actions: <Widget>[
+        CupertinoDialogAction(
+          child: Text("Ok"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          isDefaultAction: true,
+          isDestructiveAction: false,
+        ),
+      ],
+      scrollController: scrollController,
+      actionScrollController: actionScrollController,
+    );
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return dia;
+        });
   }
 }
