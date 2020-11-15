@@ -10,7 +10,7 @@ Future<void> main() async {
   var authToken = prefs.getString('authToken');
   User user;
   if (authToken != null) {
-     user = await User.getCurrentUser(authToken);
+    user = await User.getCurrentUser(authToken);
   }
   runApp(MaterialApp(
       home: authToken == null

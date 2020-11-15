@@ -7,8 +7,6 @@ import 'package:team3/Common/InfoDialog.dart';
 import 'package:team3/Common/data.dart';
 import 'package:team3/Common/upperTransition.dart';
 import 'package:team3/EmailVerification/view.dart';
-import 'package:team3/Login/view.dart';
-import 'package:team3/home/home.dart';
 import 'package:team3/models/user.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -49,7 +47,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         MaterialPageRoute(
             builder: (context) => EmailVerificationPage(
                   email: email,
-                )),
+            )),
       );
     }
   }
@@ -61,16 +59,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Container(
-        child: Stack(
+      child:
+      SingleChildScrollView(
+        child:
+        Stack(
           children: <Widget>[
             Container(
+                height: MediaQuery.of(context).size.height+120,
                 decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/htw-bg1.jpg'), fit: BoxFit.cover),
             )),
             Container(
-              height: double.infinity,
+              height: MediaQuery.of(context).size.height+120,
               width: double.infinity,
               child: SafeArea(
                 child: Column(
@@ -275,7 +276,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ),
                     SizedBox(
-                      height: 100,
+                      height: 60,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),

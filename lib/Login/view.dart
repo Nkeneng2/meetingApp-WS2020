@@ -60,19 +60,23 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Container(
-        child: Stack(
+      child:
+      SingleChildScrollView(
+        child:
+        Stack(
           children: <Widget>[
             Container(
+                height: MediaQuery.of(context).size.height+60,
                 decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/htw-bg1.jpg'), fit: BoxFit.cover),
-            )),
+                  image: DecorationImage(
+                      image: AssetImage('assets/htw-bg1.jpg'), fit: BoxFit.cover),
+                )),
             Container(
-              height: double.infinity,
+              height: MediaQuery.of(context).size.height+60,
               width: double.infinity,
               child: SafeArea(
-                child: Column(
+                child:
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
@@ -108,12 +112,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Center(
                         child: Text(
-                      'LOGIN',
-                      style: TextStyle(
-                          fontSize: 32,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    )),
+                          'LOGIN',
+                          style: TextStyle(
+                              fontSize: 32,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        )),
                     SizedBox(
                       height: 20,
                     ),
@@ -137,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.white)),
+                                      BorderSide(color: Colors.white)),
                                   hintText: 'Username/Email',
                                   hintStyle: TextStyle(
                                     color: Colors.white,
@@ -145,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   focusColor: Colors.white),
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                              TextStyle(color: Colors.white, fontSize: 18),
                             ),
                           ),
                           SizedBox(
@@ -167,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.white)),
+                                      BorderSide(color: Colors.white)),
                                   hintText: 'Password',
                                   hintStyle: TextStyle(
                                     color: Colors.white,
@@ -175,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   focusColor: Colors.white),
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                              TextStyle(color: Colors.white, fontSize: 18),
                             ),
                           ),
                           SizedBox(
@@ -184,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                           Center(
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(left: 47, right: 50),
+                              const EdgeInsets.only(left: 47, right: 50),
                               child: ButtonTheme(
                                 minWidth: MediaQuery.of(context).size.width,
                                 height: 55,
@@ -233,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     SizedBox(
-                      height: 150,
+                      height: 60,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 0),
@@ -267,9 +271,9 @@ class _LoginPageState extends State<LoginPage> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                    Color.fromRGBO(124, 186, 15, 0.58),
-                    Color.fromRGBO(184, 189, 73, 0.56)
-                  ])),
+                        Color.fromRGBO(124, 186, 15, 0.58),
+                        Color.fromRGBO(184, 189, 73, 0.56)
+                      ])),
             ),
           ],
         ),
