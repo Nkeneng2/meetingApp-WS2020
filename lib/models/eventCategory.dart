@@ -26,23 +26,6 @@ class EventCategory {
     return map;
   }
 
-  Future login(String url, {Map body}) async {
-    return http.post(url, body: body, headers: {
-      "X-Parse-Application-Id": appId,
-      "X-Parse-REST-API-Key": apiKey,
-      "X-Parse-Revocable-Session": '1',
-    }).then((http.Response response) {
-      final int statusCode = response.statusCode;
-
-      print(response.body.toString());
-
-      if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw new Exception("Error while fetching data");
-      }
-      return EventCategory.fromJson(json.decode(response.body));
-    });
-  }
-
   eventConfirm() {}
 
   eventDeny() {}

@@ -3,6 +3,7 @@ import 'package:team3/Common/data.dart';
 import 'package:team3/models/eventCategory.dart';
 import 'dart:convert';
 import 'package:team3/models/user.dart';
+import 'package:team3/Common/api.dart';
 
 class Event {
   final String objectId;
@@ -56,23 +57,6 @@ class Event {
     map["userId"] = owner;
     map["eventCategory"] = eventCategory;
     return map;
-  }
-
-  Future login(String url, {Map body}) async {
-    return http.post(url, body: body, headers: {
-      "X-Parse-Application-Id": appId,
-      "X-Parse-REST-API-Key": apiKey,
-      "X-Parse-Revocable-Session": '1',
-    }).then((http.Response response) {
-      final int statusCode = response.statusCode;
-
-      print(response.body.toString());
-
-      if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw new Exception("Error while fetching data");
-      }
-      return Event.fromJson(json.decode(response.body));
-    });
   }
 
   eventConfirm() {}
