@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:team3/home/home.dart';
 import 'Login/view.dart';
+import 'models/user.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var authToken = prefs.getString('authToken');
+  User user;
+  if (authToken != null) {
+     user = await User.getCurrentUser(authToken);
+  }
+  runApp(MaterialApp(
+      home: authToken == null
+          ? MyApp()
+          : HomePage(
+              user: user,
+            )));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,9 +28,8 @@ class MyApp extends StatelessWidget {
       title: 'App für betriebliche Kommunkation',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        visualDensity: VisualDensity.adaptivePlatformDensity
-      ),
+          primarySwatch: Colors.blueGrey,
+          visualDensity: VisualDensity.adaptivePlatformDensity),
       home: LoginPage(title: 'App für betriebliche Kommunkation'),
     );
   }

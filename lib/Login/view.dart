@@ -2,10 +2,12 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:team3/Common/InfoDialog.dart';
 import 'package:team3/Common/data.dart';
 import 'package:team3/Common/upperTransition.dart';
 import 'package:team3/home/home.dart';
 import 'package:team3/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -33,9 +35,14 @@ class _LoginPageState extends State<LoginPage> {
     User formData = new User(userName: username, password: password);
     print(BaseUrl + 'login');
     User user = await formData
-        .login(BaseUrl + 'login', body: formData.toMap())
+        .postData(BaseUrl + 'login', body: formData.toMap())
         .catchError(onError);
-    if (user.email != null) {
+    if (user != null && user.userId != null) {
+      //TODO Don't forget to clear it on logout
+      //! SharedPreferences prefs = await SharedPreferences.getInstance();
+      //! prefs.remove('authToken');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('authToken', user.authToken);
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -47,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   onError(e) {
-    _handleLoginError();
+    handleLoginError(context: context, message: e.source);
   }
 
   @override
@@ -268,32 +275,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  void _handleLoginError() {
-    var scrollController = ScrollController();
-    var actionScrollController = ScrollController();
-    var dia = CupertinoAlertDialog(
-      title: Text("Oups"),
-      content: Text("Username / email  or password incorrect"),
-      actions: <Widget>[
-        CupertinoDialogAction(
-          child: Text("Ok"),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          isDefaultAction: true,
-          isDestructiveAction: false,
-        ),
-      ],
-      scrollController: scrollController,
-      actionScrollController: actionScrollController,
-    );
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return dia;
-        });
   }
 }
