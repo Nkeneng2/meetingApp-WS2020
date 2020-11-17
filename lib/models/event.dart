@@ -1,9 +1,5 @@
-import 'package:http/http.dart' as http;
-import 'package:team3/Common/data.dart';
 import 'package:team3/models/eventCategory.dart';
-import 'dart:convert';
 import 'package:team3/models/user.dart';
-import 'package:team3/Common/api.dart';
 
 class Event {
   final String objectId;
@@ -15,7 +11,7 @@ class Event {
   final String description;
   final bool shareable;
   final User owner;
-  final EventCategory eventCategory;
+  EventCategory eventCategory;
 
   Event(
       {this.objectId,
@@ -40,7 +36,7 @@ class Event {
       description: json['description'],
       shareable: json['shareable'],
       owner: null,
-      eventCategory: EventCategory.fromJson(json["categoryId"]),
+      eventCategory: EventCategory.fromJson(json['categoryId']),
     );
   }
 

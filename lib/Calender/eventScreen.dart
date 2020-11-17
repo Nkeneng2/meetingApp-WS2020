@@ -85,14 +85,13 @@ class _EventScreenState extends State<EventScreen> {
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       var results = body["results"];
-
+      int i = 0;
       for (var event in results) {
         eventList.add(Event.fromJson(event));
       }
     } else {
       //Handle error
     }
-
     return eventList;
   }
 

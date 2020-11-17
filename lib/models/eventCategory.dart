@@ -1,7 +1,6 @@
 import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-import 'package:team3/Common/data.dart';
+import 'package:http/http.dart';
+import 'package:team3/models/eventCategory_utils.dart';
 
 class EventCategory {
   final String objectId;
@@ -16,6 +15,27 @@ class EventCategory {
       name: json['name'],
       color: json['color'],
     );
+  }
+
+  // ignore: missing_return
+  Future<EventCategory> fromJsonWithId(String id) async {
+    EventCategory eventtemp;
+    Response response = await EventCategoryUtils.getEventCategoryById(id);
+    print("Code is ${response.statusCode}");
+    print("Response is ${response.body}");
+
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+      var results = body["results"];
+
+      for (var eventcategory in results) {
+        eventtemp = EventCategory.fromJson(eventcategory);
+      }
+    } else {
+      //Handle error
+    }
+
+    return eventtemp;
   }
 
   Map toMap() {
