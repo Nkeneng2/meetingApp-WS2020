@@ -33,14 +33,14 @@ class Event {
     return Event(
       objectId: json['objectId'],
       title: json['title'],
-      date: json['date'],
+      date: DateTime.parse(json['date']['iso']),
       allday: json['allday'],
-      startAt: json['startAt'],
-      endAt: json['endAt'],
+      startAt: DateTime.parse(json['startAt']['iso']),
+      endAt: DateTime.parse(json['endAt']['iso']),
       description: json['description'],
       shareable: json['shareable'],
-      owner: json['userId'],
-      eventCategory: json['eventCategory'],
+      owner: null,
+      eventCategory: EventCategory.fromJson(json["categoryId"]),
     );
   }
 

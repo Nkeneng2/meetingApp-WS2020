@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:team3/models/event.dart';
+import 'package:team3/Calender/eventScreen.dart';
 
 // Example holidays
 final Map<DateTime, List> _holidays = {
@@ -140,6 +141,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your onPressed code here!
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => EventScreen(title: "Event add")),
+          );
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.green,
