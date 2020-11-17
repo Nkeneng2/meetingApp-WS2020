@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:team3/models/event.dart';
 import 'package:team3/Common/data.dart';
+import 'package:team3/models/user.dart';
 
 class EventUtils {
   //Create
@@ -30,6 +31,21 @@ class EventUtils {
       'X-Parse-REST-API-Key': apiKey,
       "X-Parse-Revocable-Session": '1',
       "Content-Type": 'application/json',
+    });
+
+    return response;
+  }
+
+  //Read
+  static Future getEventListByUser(User user) async {
+    String apiUrl = BaseUrl + "classes/Event";
+
+    Response response = await get(apiUrl, headers: {
+      'X-Parse-Application-Id': appId,
+      'X-Parse-REST-API-Key': apiKey,
+      "X-Parse-Revocable-Session": '1',
+      "Content-Type": 'application/json',
+      "where": "= {\"userId\": \"" + user.userId + "\"}",
     });
 
     return response;

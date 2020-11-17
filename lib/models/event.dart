@@ -11,7 +11,7 @@ class Event {
   final String description;
   final bool shareable;
   final User owner;
-  EventCategory eventCategory;
+  final EventCategory eventCategory;
 
   Event(
       {this.objectId,
@@ -52,7 +52,8 @@ class Event {
     map["description"] = description;
     map["shareable"] = shareable;
     map["userId"] = owner;
-    map["eventCategory"] = eventCategory;
+    map["categoryName"] = eventCategory.name;
+    map["categoryColor"] = eventCategory.color;
     return map;
   }
 
