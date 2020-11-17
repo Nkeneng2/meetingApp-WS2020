@@ -45,7 +45,7 @@ class EventUtils {
       'X-Parse-REST-API-Key': apiKey,
       "X-Parse-Revocable-Session": '1',
       "Content-Type": 'application/json',
-      "where": "= {\"userId\": \"" + user.userId + "\"}",
+      "where": "={\"userId\": \"" + user.userId + "\"}",
     });
 
     return response;
