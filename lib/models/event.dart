@@ -36,7 +36,8 @@ class Event {
       description: json['description'],
       shareable: json['shareable'],
       owner: null,
-      eventCategory: EventCategory.fromJson(json['categoryId']),
+      eventCategory: EventCategory(
+          name: json['categoryName'], color: json['categoryColor']),
     );
   }
 
