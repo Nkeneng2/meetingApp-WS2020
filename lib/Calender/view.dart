@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:team3/models/event.dart';
 import 'package:team3/Calender/eventScreen.dart';
+import 'package:team3/models/event_utils.dart';
 
 // Example holidays
 final Map<DateTime, List> _holidays = {
@@ -11,6 +14,7 @@ final Map<DateTime, List> _holidays = {
   DateTime(2020, 4, 21): ['Easter Sunday'],
   DateTime(2020, 4, 22): ['Easter Monday'],
 };
+Map<DateTime, List> _events = new Map<DateTime, List>();
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -22,76 +26,44 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  Map<DateTime, List> _events;
-  List _selectedEvents;
+  List _selectedEvents = new List<Event>();
   AnimationController _animationController;
+  final _selectedDay = DateTime.now();
 
   // Calender Controller
   CalendarController _calendarController;
 
+  void dataHandler(List<Event> value) {
+    List<DateTime> keys = new List<DateTime>();
+
+    for (Event event in value) {
+      if (keys.isEmpty) {
+        keys.add(event.date);
+      } else if (!keys.contains(event.date)) {
+        keys.add(event.date);
+      }
+    }
+    for (DateTime key in keys) {
+      List<Event> temp = new List<Event>();
+      for (Event event in value) {
+        if (key.isSameDate(event.date)) {
+          temp.add(event);
+        }
+      }
+      _events[key] = temp;
+    }
+    _selectedEvents = _events[_selectedDay] ?? [];
+  }
+
   @override
   void initState() {
     super.initState();
-    final _selectedDay = DateTime.now();
-
-    _events = {
-      _selectedDay.subtract(Duration(days: 30)): ['osama', 'ahmad', 'khaled'],
-      _selectedDay.subtract(Duration(days: 27)): ['Event A1'],
-      _selectedDay.subtract(Duration(days: 20)): [
-        'Event A2',
-        'Event B2',
-        'Event C2',
-        'Event D2'
-      ],
-      _selectedDay.subtract(Duration(days: 16)): ['Event A3', 'Event B3'],
-      _selectedDay.subtract(Duration(days: 10)): [
-        'Event A4',
-        'Event B4',
-        'Event C4'
-      ],
-      _selectedDay.subtract(Duration(days: 4)): [
-        'Event A5',
-        'Event B5',
-        'Event C5'
-      ],
-      _selectedDay.subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
-      _selectedDay: ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
-      _selectedDay.add(Duration(days: 1)): [
-        'Event A8',
-        'Event B8',
-        'Event C8',
-        'Event D8'
-      ],
-      _selectedDay.add(Duration(days: 3)):
-          Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
-      _selectedDay.add(Duration(days: 7)): [
-        'Event A10',
-        'Event B10',
-        'Event C10'
-      ],
-      _selectedDay.add(Duration(days: 11)): ['Event A11', 'Event B11'],
-      _selectedDay.add(Duration(days: 17)): [
-        'Event A12',
-        'Event B12',
-        'Event C12',
-        'Event D12'
-      ],
-      _selectedDay.add(Duration(days: 22)): ['Event A13', 'Event B13'],
-      _selectedDay.add(Duration(days: 26)): [
-        'Event A14',
-        'Event B14',
-        'Event C14'
-      ],
-    };
-
     _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
-
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
-
     _animationController.forward();
   }
 
@@ -128,10 +100,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
+          FutureBuilder(
+            future: geteventList(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Event>> snapshot) {
+              if (snapshot.data != null) {
+                dataHandler(snapshot.data);
+                return _buildTableCalendarWithBuilders();
+              } else
+                return Center(child: CircularProgressIndicator());
+            },
+          ),
           // Switch out 2 lines below to play with TableCalendar's settings
           //-----------------------
-
-          _buildTableCalendarWithBuilders(),
           const SizedBox(height: 8.0),
           // _buildButtons(),
           const SizedBox(height: 8.0),
@@ -151,6 +132,25 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         backgroundColor: Colors.green,
       ),
     );
+  }
+
+  //
+  Future<List<Event>> geteventList() async {
+    List<Event> eventList = [];
+    Response response = await EventUtils.getEventList();
+    print("Code is ${response.statusCode}");
+    print("Response is ${response.body}");
+
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+      var results = body["results"];
+      for (var event in results) {
+        eventList.add(Event.fromJson(event));
+      }
+    } else {
+      //Handle error
+    }
+    return eventList;
   }
 
   // More advanced TableCalendar configuration (using Builders & Styles)
@@ -212,7 +212,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         },
         markersBuilder: (context, date, events, holidays) {
           final children = <Widget>[];
-
           if (events.isNotEmpty) {
             children.add(
               Positioned(
@@ -340,11 +339,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 margin:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
-                  title: Text(event.toString()),
+                  title: Text(event.title),
                   onTap: () => print('$event tapped!'),
                 ),
               ))
           .toList(),
     );
+  }
+}
+
+extension DateOnlyCompare on DateTime {
+  bool isSameDate(DateTime other) {
+    return this.year == other.year &&
+        this.month == other.month &&
+        this.day == other.day;
   }
 }
