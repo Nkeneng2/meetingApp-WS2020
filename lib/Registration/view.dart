@@ -60,18 +60,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return Material(
       child:
-      SingleChildScrollView(
-        child:
-        Stack(
-          children: <Widget>[
-            Container(
-                height: MediaQuery.of(context).size.height+120,
-                decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/htw-bg1.jpg'), fit: BoxFit.cover),
-            )),
-            Container(
-              height: MediaQuery.of(context).size.height+120,
+      Stack(
+        children: <Widget>[
+          Container(
+              decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/htw-bg1.jpg'), fit: BoxFit.cover),
+          )),
+          SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
               width: double.infinity,
               child: SafeArea(
                 child: Column(
@@ -301,7 +299,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           )
                         ],
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
@@ -314,8 +315,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     Color.fromRGBO(184, 189, 73, 0.56)
                   ])),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

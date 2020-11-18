@@ -7,6 +7,8 @@ import 'models/user.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //TODO only for test purposes to continue working on login screen
+  // prefs.remove('authToken');
   var authToken = prefs.getString('authToken');
   User user;
   if (authToken != null) {
