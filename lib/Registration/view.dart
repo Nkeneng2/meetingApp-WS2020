@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -69,7 +69,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           )),
           SingleChildScrollView(
             child: Container(
-              height: MediaQuery.of(context).size.height,
+              height: (Platform.isIOS)? MediaQuery.of(context).size.height:null,
               width: double.infinity,
               child: SafeArea(
                 child: Column(
