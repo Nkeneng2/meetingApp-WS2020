@@ -3,25 +3,25 @@ import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void handleLoginError({context, message}) async {
+void handleAndroidError({BuildContext context, message}) async {
+  return showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text('Oups'),
+      content: Text(message),
+      actions: <Widget>[
+        FlatButton(
+          child: Text('Ok'),
+          onPressed: () => Navigator.of(context).pop(true),
+        ),
+      ],
+    ),
+  );
+}
+
+void handleIosError({BuildContext context, message}) async {
   var scrollController = ScrollController();
   var actionScrollController = ScrollController();
-
-  if (!Platform.isIOS) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Oups'),
-        content: Text(message),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Ok'),
-            onPressed: () => Navigator.of(context).pop(true),
-          ),
-        ],
-      ),
-    );
-  }
   var dia = CupertinoAlertDialog(
     title: Text("Oups"),
     content: Text(message),
@@ -29,7 +29,8 @@ void handleLoginError({context, message}) async {
       CupertinoDialogAction(
         child: Text("Ok"),
         onPressed: () {
-            Navigator.of(context).pop(true);
+          // Navigator.of(context).pop();
+          Navigator.of(context, rootNavigator: true).pop();
         },
         isDefaultAction: true,
         isDestructiveAction: false,

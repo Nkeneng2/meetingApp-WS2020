@@ -64,7 +64,9 @@ class _LoginPageState extends State<LoginPage> {
 
   /// method to be trigger on exception by login
   onError(e) {
-    handleLoginError(context: context, message: e.source);
+    (Platform.isIOS)
+        ? handleIosError(context: context, message: e.source)
+        : handleAndroidError(context: context, message: e.source);
   }
 
   @override
@@ -79,7 +81,8 @@ class _LoginPageState extends State<LoginPage> {
         )),
         SingleChildScrollView(
           child: Container(
-            height: (Platform.isIOS)? MediaQuery.of(context).size.height:null,
+            height:
+                (Platform.isIOS) ? MediaQuery.of(context).size.height : null,
             width: double.infinity,
             child: SafeArea(
               child: Column(

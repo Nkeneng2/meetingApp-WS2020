@@ -52,9 +52,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     }
   }
 
+  /// method to be trigger on exception by login
   onError(e) {
-    handleLoginError(context: context,message: e.source);
+    (Platform.isIOS)
+        ? handleIosError(context: context, message: e.source)
+        : handleAndroidError(context: context, message: e.source);
   }
+
 
   @override
   Widget build(BuildContext context) {
