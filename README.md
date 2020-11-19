@@ -29,7 +29,7 @@
 <br />
 <p align="center">
   <a href="#" align="center">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">App für betriebsinterne Kommunikation
@@ -48,7 +48,6 @@ und Terminvereinbarung (HTW)
     ·
     <a href="">Request Feature</a>
   </p>
-</p>
 
 
 
@@ -178,7 +177,7 @@ Project Link: [https://gitlab.rz.htw-berlin.de/softwareentwicklungsprojekt/wise2
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: assets/screenshot.png
 
 
 

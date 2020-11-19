@@ -7,42 +7,32 @@ class HomePage extends StatefulWidget {
 
   final User user;
 
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home page'),
-      ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child:
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 10),
-                child: Text(
-                  'Willkommen ' + widget.user.email,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 32,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold),
-                ),
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15, right: 10),
+              child: Text(
+                'Willkommen ' + widget.user.email,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 32,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
-
 }

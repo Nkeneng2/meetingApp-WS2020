@@ -7,13 +7,12 @@ import 'package:team3/Common/InfoDialog.dart';
 import 'package:team3/Common/data.dart';
 import 'package:team3/Common/upperTransition.dart';
 import 'package:team3/home/home.dart';
+import 'package:team3/main.dart';
 import 'package:team3/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  LoginPage({Key key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -55,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => HomePage(
+            builder: (context) => MyApp(
                   user: user,
                 )),
       );
@@ -71,221 +70,223 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return
+      Material(
         child: Stack(
-      children: <Widget>[
-        Container(
-            decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/htw-bg1.jpg'), fit: BoxFit.cover),
-        )),
-        SingleChildScrollView(
-          child: Container(
-            height:
-                (Platform.isIOS) ? MediaQuery.of(context).size.height : null,
-            width: double.infinity,
-            child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 60,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30),
-                    child: Text(
-                      'HTW BERLIN',
+        children: <Widget>[
+          Container(
+              decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/htw-bg1.jpg'), fit: BoxFit.cover),
+          )),
+          SingleChildScrollView(
+            child: Container(
+              height:
+                  (Platform.isIOS) ? MediaQuery.of(context).size.height : null,
+              width: double.infinity,
+              child: SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Text(
+                        'HTW BERLIN',
+                        style: TextStyle(
+                            fontSize: 32,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Text(
+                        'betriebliche Kommunikation und Terminvereinbarung',
+                        style: TextStyle(
+                            fontSize: 19,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Center(
+                        child: Text(
+                      'LOGIN',
                       style: TextStyle(
                           fontSize: 32,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.left,
+                    )),
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30),
-                    child: Text(
-                      'betriebliche Kommunikation und Terminvereinbarung',
-                      style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  Center(
-                      child: Text(
-                    'LOGIN',
-                    style: TextStyle(
-                        fontSize: 32,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  )),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 47, right: 50),
-                          child: TextFormField(
-                            onChanged: (val) {
-                              setState(() => username = val);
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Please enter your username';
-                              }
-                              return null;
-                            },
-                            cursorColor: Colors.white,
-                            decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                hintText: 'Username/Email',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.0,
-                                ),
-                                focusColor: Colors.white),
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 47, right: 50),
-                          child: TextFormField(
-                            onChanged: (val) {
-                              setState(() => password = val);
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Please enter your password';
-                              }
-                              return null;
-                            },
-                            cursorColor: Colors.white,
-                            decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                hintText: 'Password',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.0,
-                                ),
-                                focusColor: Colors.white),
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        Center(
-                          child: Padding(
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Padding(
                             padding: const EdgeInsets.only(left: 47, right: 50),
-                            child: ButtonTheme(
-                              minWidth: MediaQuery.of(context).size.width,
-                              height: 55,
-                              child: RaisedButton(
-                                onPressed: () async {
-                                  if (_formKey.currentState.validate()) {
-                                    login();
-                                  }
-                                },
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25)),
-                                child: Text(
-                                  'Sign In',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 25),
+                            child: TextFormField(
+                              onChanged: (val) {
+                                setState(() => username = val);
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter your username';
+                                }
+                                return null;
+                              },
+                              cursorColor: Colors.white,
+                              decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white)),
+                                  hintText: 'Username/Email',
+                                  hintStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.0,
+                                  ),
+                                  focusColor: Colors.white),
+                              style: TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 47, right: 50),
+                            child: TextFormField(
+                              onChanged: (val) {
+                                setState(() => password = val);
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                                return null;
+                              },
+                              cursorColor: Colors.white,
+                              decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white)),
+                                  hintText: 'Password',
+                                  hintStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.0,
+                                  ),
+                                  focusColor: Colors.white),
+                              style: TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 50,
+                          ),
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 47, right: 50),
+                              child: ButtonTheme(
+                                minWidth: MediaQuery.of(context).size.width,
+                                height: 55,
+                                child: RaisedButton(
+                                  onPressed: () async {
+                                    if (_formKey.currentState.validate()) {
+                                      login();
+                                    }
+                                  },
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25)),
+                                  child: Text(
+                                    'Sign In',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 25),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: GestureDetector(
-                          onTap: () {
-                            print('forgot');
-                          },
-                          child: Container(
-                            child: Text(
-                              'Forgot password ?',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.of(context)
-                                  .push(createRoute('register'));
+                              print('forgot');
                             },
                             child: Container(
                               child: Text(
-                                'Already have an anccount ? Sign Up',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
+                                'Forgot password ?',
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 18),
                               ),
                             ),
                           ),
                         )
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .push(createRoute('register'));
+                              },
+                              child: Container(
+                                child: Text(
+                                  'Already have an anccount ? Sign Up',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
               ),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                    Color.fromRGBO(124, 186, 15, 0.58),
+                    Color.fromRGBO(184, 189, 73, 0.56)
+                  ])),
             ),
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                  Color.fromRGBO(124, 186, 15, 0.58),
-                  Color.fromRGBO(184, 189, 73, 0.56)
-                ])),
           ),
-        ),
-      ],
-    ));
+        ],
+    ),
+      );
   }
 }
