@@ -48,9 +48,6 @@ class User {
       final int statusCode = response.statusCode;
       final responseText = json.decode(response.body);
 
-      //TODO only for debug purposes
-      print(response.body.toString());
-
       if (statusCode != 201 && statusCode != 200 || json == null) {
         throw (responseText['error'].toString());
       }

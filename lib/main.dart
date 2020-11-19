@@ -11,8 +11,6 @@ import 'package:flutter/services.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //TODO only for test purposes to continue working on login screen
-  // prefs.remove('authToken');
   var authToken = prefs.getString('authToken');
   User user;
   if (authToken != null) {
@@ -73,14 +71,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-            title: Text('SHS HTW App'),
-            backgroundColor: Colors.lightGreen,
-          ),
-          body: HomePage(
-            user: widget.user,
-          ),
-          drawer: drawer(context: context),
-          floatingActionButton: floatingActionButton(scanQR: () => _scanQR()));
+        appBar: AppBar(
+          title: Text('SHS HTW App'),
+          backgroundColor: Colors.lightGreen,
+        ),
+        body: HomePage(
+          user: widget.user,
+        ),
+        drawer: drawer(context: context),
+        floatingActionButton: floatingActionButton(scanQR: () => _scanQR()));
   }
 }

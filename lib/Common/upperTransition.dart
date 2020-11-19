@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:team3/Login/view.dart';
 import 'package:team3/Registration/view.dart';
+import 'package:team3/Reset/view.dart';
 
 Route createRoute(route) {
   var callback;
@@ -13,6 +14,11 @@ Route createRoute(route) {
     case 'login':
       {
         callback = LoginPage();
+        break;
+      }
+    case 'reset':
+      {
+        callback = ResetPage();
         break;
       }
   }
