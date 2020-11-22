@@ -1,4 +1,8 @@
+//  Copyright (c) 2019 Aleksander Woźniak
+//  Licensed under Apache License v2.0
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'Calender/view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:team3/Login/view.dart';
 import 'package:team3/Widgets/Drawer.dart';
@@ -8,7 +12,8 @@ import 'models/user.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 
-Future<void> main() async {
+
+Future<void> main()  initializeDateFormatting().then((_) asyn c{
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var authToken = prefs.getString('authToken');
@@ -26,9 +31,10 @@ Future<void> main() async {
       home: authToken == null
           ? LoginPage()
           : MyApp(
-              user: user,
-            )));
-}
+        user: user,
+      )));
+})
+
 
 class MyApp extends StatefulWidget {
   MyApp({Key key, this.user}) : super(key: key);

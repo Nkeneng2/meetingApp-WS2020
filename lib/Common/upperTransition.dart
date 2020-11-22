@@ -1,7 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:team3/Calender/view.dart';
+import 'package:team3/Login/view.dart';
+import 'package:team3/Registration/view.dart';
 import 'package:team3/Login/view.dart';
 import 'package:team3/Registration/view.dart';
 import 'package:team3/Reset/view.dart';
+
+
 
 Route createRoute(route) {
   var callback;
@@ -37,4 +43,37 @@ Route createRoute(route) {
       );
     },
   );
+}
+
+class FirstRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'SHS',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      home: MyHomePage(title: 'Table Calendar'),
+      color: Colors.green.shade400,
+    );
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
 }

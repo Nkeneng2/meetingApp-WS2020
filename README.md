@@ -100,14 +100,94 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
+#### Configure the Flutter SDK
+
+1. Download the ([.zip file of the Flutter SDK](https://flutter.dev/docs/get-started/install/windows#get-the-flutter-sdk)).
+2. Extract the .zip file in C disk. C:\flutter.
+3. Press Windows key and in the search bar type variable.
+4. Select Edit the system environment variables.
+5. Click on Environment Variables.
+6. In System variables select the Path variable and then click on Edit.
+7. Click on New and paste the path of bin folder of Flutter:
+    C:\flutter\bin
+8. Now click on Ok in the 3 windows to save changes.
+
+#### Install Android Studio
+1. Download [Android Studio](https://developer.android.com/studio).
+2. Run the installer.
+3. Click on Next.
+4. Mark all the boxes and click on Next 2 more times.
+5. Click on Install.
+6. When finished, click on Next and then click on Finish.
+7. Now select Do not import settings and click on OK.
+It will open Android Studio Setup Wizard.
+8. Click on Next.
+9. Select Custom and again click on Next.
+10. Select the theme editor (I recommend Darcula) and click on Next.
+11. Now download the Android SDK, to do this check all the check boxes.
+12. Click on the button that has 3 points “…”.
+The file browser will open.
+13. Select the folder of your windows username, inside create a folder called Android and inside this a folder called SDK, and then select the folder SDK and click on OK.
+    C:\Users\<YOUR_WINDOWS_USERNAME>\Android\SDK
+14. Now click on Next 2 times and then click on Finish.
+15. When the download is finished, click on Finish and Android Studio will open.
+
+#### Install the Flutter Plugin on Android Studio
+1. In the window Welcome to Android Studio click on Configure and then on Plugins.
+2. In the search bar type in flutter and click on Search in repositories.
+3. Click on the one that says Flutter, Then click on Install, Accept and Yes.
+4. Now click on Restart Android Studio, then on OK, and on Restart.
+5. Android Studio will open again.
+
+#### Add the Android SDK to Flutter
+
+1. Again open the Environment variables.
+2. And in the System variables click on New.
+3. In Variable name type ANDROID_HOME.
+4. Click on Browse directory and select the path to download the Android SDK:
+    C:\Users\<YOUR_WINDOWS_USERNAME>\Android\SDK
+5. Now click on Ok in the 3 windows to save changes.
+6. Press the Windows key and in the search bar type cmd and select the Command Prompt.
+7. Type the command flutter doctor and press Enter.
+8. You will notice that you need to accept Android licenses, so type the following command and press Enter:
+    flutter doctor --android-licenses
+9. Now you will be asked if you agree each license, in which you must type Y and press Enter for each license.
+10. When you have accepted all the licenses you will get All SDK package licenses accepted and close the Command Prompt.
+
+#### Create an Android Emulator on Android Studio
+1. In Android Studio, click on Tools > AVD Manager.
+2. Now click on Create Virtual Device.
+3. Select a Nexus 5 and click on Next.
+4. Select the system image that you downloaded with your Android SDK**, i**n my case it was Pie – 28 – x86 – Android 9.0, and then click on Next.
+5. Click on Finish.
+6. Now click on the button Run ▶ to run the Android Emulator and closes the window.
+
+#### Run Flutter App on an Android Emulator from Android Studio
+1. In the toolbar at the side of main.dart click the button Run ▶ to run the app on the emulator. The first time it runs it will take a little bit.
+2. It will show the Flutter App on the emulator, which shows how many times you press a button.
+3. Now close Android Studio and continue with the next step.
+
+#### Install Visual Studio Code
+1. Download [Visual Studio Code](https://code.visualstudio.com/).
+2. Install it, the default configuration is more than enough.
+
+#### Install the extension of Flutter on Visual Studio Code
+1. Open Visual Studio Code.
+2. Click on the Extensions or Ctrl+Shift+X.
+3. In the search bar type flutter.
+4. Select Flutter by the Author Dart Code.
+5. Click on Install.
+6. Click on Reload.
+
+#### Run Flutter App on an Android Emulator from Visual Studio Code
+1. In VS Code in the Explorer (Ctrl+Shift+E) open with double click the main.dart file that is in the folder lib (lib > main.dart).
+2. Now in the toolbar click on View > Debug > Start Debugging or F5.
+3. Select the Emulator that we created in Android Studio (In my case it is Nexus_5X_API_28) and press Enter.
+4. Finally, the sample App will be executed.
+
 
 ### Installation
-
+<!---
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
 ```sh
@@ -121,7 +201,7 @@ npm install
 ```JS
 const API_KEY = 'ENTER YOUR API';
 ```
-
+--->
 
 
 <!-- USAGE EXAMPLES -->
