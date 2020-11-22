@@ -27,6 +27,11 @@ Route createRoute(route) {
         callback = ResetPage();
         break;
       }
+    case 'calender':
+      {
+        callback = MyHomePage(title: 'Calender page',);
+        break;
+      }
   }
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => callback,

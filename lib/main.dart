@@ -12,8 +12,7 @@ import 'models/user.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 
-
-Future<void> main()  initializeDateFormatting().then((_) asyn c{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var authToken = prefs.getString('authToken');
@@ -21,7 +20,7 @@ Future<void> main()  initializeDateFormatting().then((_) asyn c{
   if (authToken != null) {
     user = await User.getCurrentUser(authToken);
   }
-  runApp(MaterialApp(
+  initializeDateFormatting().then((_) => runApp(MaterialApp(
       title: 'App für betriebliche Kommunkation',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -31,10 +30,9 @@ Future<void> main()  initializeDateFormatting().then((_) asyn c{
       home: authToken == null
           ? LoginPage()
           : MyApp(
-        user: user,
-      )));
-})
-
+              user: user,
+            ))));
+}
 
 class MyApp extends StatefulWidget {
   MyApp({Key key, this.user}) : super(key: key);

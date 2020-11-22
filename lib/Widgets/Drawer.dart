@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:team3/Calender/view.dart';
 import 'package:team3/Common/upperTransition.dart';
 import 'package:team3/Drawer%20Menu/Customize.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,10 +39,12 @@ Drawer drawer({context}) {
         ),
         CustomListTile(Icons.person, 'Profile', () => {}),
         CustomListTile(Icons.qr_code_scanner, 'QR Code Scanner', () => {}),
-        CustomListTile(Icons.calendar_view_day, 'Calender', () => {}),
+        CustomListTile(Icons.calendar_view_day, 'Calender',
+            () => {Navigator.of(context).push(createRoute('calender'))}),
         CustomListTile(Icons.notifications, 'Notifications', () => {}),
-        CustomListTile(Icons.settings, 'Setttings', () => {}),
-        CustomListTile(Icons.logout, 'Logout', () async => {logout(context: context)}),
+        CustomListTile(Icons.settings, 'Settings', () => {}),
+        CustomListTile(
+            Icons.logout, 'Logout', () async => {logout(context: context)}),
       ],
     ),
   );
@@ -51,6 +54,5 @@ void logout({context}) async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.remove('authToken');
-  Navigator.of(context)
-      .push(createRoute('login'));
+  Navigator.of(context).push(createRoute('login'));
 }
