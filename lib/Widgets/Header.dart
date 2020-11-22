@@ -12,7 +12,7 @@ Widget header() {
         Padding(
           padding: const EdgeInsets.only(left: 30),
           child: Text(
-            'HTW BERLIN',
+            'SHS HTW BERLIN',
             style: TextStyle(
                 fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
             textAlign: TextAlign.left,
