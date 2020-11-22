@@ -6,7 +6,7 @@ import 'package:team3/Drawer%20Menu/Customize.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:team3/Login/view.dart';
 
-Drawer drawer({context}) {
+Drawer drawer({context,Function scanQR}) {
   return Drawer(
     child: ListView(
       children: <Widget>[
@@ -38,7 +38,7 @@ Drawer drawer({context}) {
           ),
         ),
         CustomListTile(Icons.person, 'Profile', () => {}),
-        CustomListTile(Icons.qr_code_scanner, 'QR Code Scanner', () => {}),
+        CustomListTile(Icons.qr_code_scanner, 'QR Code Scanner', scanQR),
         CustomListTile(Icons.calendar_view_day, 'Calender',
             () => {Navigator.of(context).push(createRoute('calender'))}),
         CustomListTile(Icons.notifications, 'Notifications', () => {}),

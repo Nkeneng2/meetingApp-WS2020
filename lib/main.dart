@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
         body: HomePage(
           user: widget.user,
         ),
-        drawer: drawer(context: context),
+        drawer: drawer(context: context,scanQR: () => _scanQR()),
         floatingActionButton: floatingActionButton(scanQR: () => _scanQR()));
   }
 }
